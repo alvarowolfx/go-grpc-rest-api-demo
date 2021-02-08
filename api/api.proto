@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = ".;tvtime";
+
+package com.aviebrantz.tvtime;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "TV Time API";
+    version: "1.0";
+  };
+  host: "localhost:9090"
+  external_docs: {
+    url: "https://github.com/alvarowolfx/grpc-rest-demo";
+    description: "Demo application building Rest APIs with gRPC";
+  }
+  schemes: HTTP;
+};

@@ -1,0 +1,4 @@
+
+[build]
+cmd = "go build -o ./tmp/main cmd/server/main.go "
+bin = "tmp/main"

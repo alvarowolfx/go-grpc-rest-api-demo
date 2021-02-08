@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = ".;tvtime";
+
+package com.aviebrantz.tvtime;
+
+import "google/api/annotations.proto";
+import "catalog.proto";
+
+message User {
+  string id = 1;
+  string username = 2;
+}
+
+message RegisterUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message RegisterUserResponse {
+  User user = 1;
+}
+
+message ListFavoritesRequest {}
+
+message ListFavoritesResponse {
+  repeated CatalogEntry entries = 1;
+}
+
+message AddRemoveMovieFavoriteRequest {
+  string movieId = 1;
+}
+
+message AddRemoveMovieFavoriteResponse {}
+
+service UserService {
+  rpc RegisterUser(RegisterUserRequest) returns (RegisterUserResponse) {
+    option (google.api.http) = {
+      post : "/v1/users",
+      body : "*"
+    };
+  }
+
+  rpc ListFavorites(ListFavoritesRequest) returns (ListFavoritesResponse) {
+    option (google.api.http) = {
+      get : "/v1/users/me/favorites"
+    };
+  }
+
+  rpc AddMovieToFavorites(AddRemoveMovieFavoriteRequest) returns (AddRemoveMovieFavoriteResponse) {
+    option (google.api.http) = {
+      put : "/v1/users/me/favorites/{movieId}",
+    };
+  }
+
+  rpc RemoveMovieFromFavorites(AddRemoveMovieFavoriteRequest) returns (AddRemoveMovieFavoriteResponse) {
+    option (google.api.http) = {
+      delete : "/v1/users/me/favorites/{movieId}",
+    };
+  }
+}

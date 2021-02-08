@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option go_package = ".;tvtime";
+
+package com.aviebrantz.tvtime;
+
+import "google/api/annotations.proto";
+
+enum CatalogType {
+  MOVIE = 0;
+  TV_SHOW = 1;
+}
+
+message CatalogEntry {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+  string imageUrl = 4;
+  CatalogType type = 5;
+}
+
+message CreateEntryRequest {
+  string name = 1;
+  string imageUrl = 2;
+  CatalogType type = 3;
+}
+
+message CreateEntryResponse {
+  CatalogEntry entry = 1;
+}
+
+message SearchCatalogFilter {
+  string term = 1;
+  CatalogType type = 2;
+  int64 page = 3;
+  int64 perPage = 4;
+}
+
+message ListResponse {
+  repeated CatalogEntry entries = 1;
+  int64 total = 2;
+  int32 page = 3;
+  int32 perPage = 4;
+}
+
+message GetCatalogRequest {
+  string slug = 1;
+}
+
+message GetCatalogResponse {
+  CatalogEntry entry = 1;
+  int64 favorited = 2;
+}
+
+service CatalogService {
+  rpc Create(CreateEntryRequest) returns (CreateEntryResponse) {
+    option (google.api.http) = {
+      post : "/v1/catalog",
+      body : "*"
+    };
+  }
+
+  rpc List(SearchCatalogFilter) returns (ListResponse) {
+    option (google.api.http) = {
+      get : "/v1/catalog"
+    };
+  }
+
+  rpc Get(GetCatalogRequest) returns (GetCatalogResponse) {
+    option (google.api.http) = {
+      get : "/v1/catalog/{slug}"
+    };
+  }
+}
