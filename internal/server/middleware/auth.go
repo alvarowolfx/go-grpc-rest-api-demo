@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"context"
-	"fmt"
 	"strings"
 
 	"com.aviebrantz.tvtime/internal/application/auth"
@@ -67,6 +66,5 @@ func GetUserIDFromContext(ctx context.Context) string {
 	if !ok {
 		return ""
 	}
-	fmt.Println("userID", userID)
 	return userID
 }
