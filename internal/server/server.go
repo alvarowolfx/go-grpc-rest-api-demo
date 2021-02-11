@@ -42,7 +42,7 @@ func grpcHandlerFunc(grpcServer *grpc.Server, otherHandler http.Handler) http.Ha
 }
 
 func getOpenAPIHandler() http.Handler {
-	mime.AddExtensionType(".svg", "image/svg+xml")
+	_ = mime.AddExtensionType(".svg", "image/svg+xml")
 
 	statikFS, err := fs.New()
 	if err != nil {
@@ -134,14 +134,8 @@ func Run() error {
 		return err
 	}
 
-	openApiHandler := getOpenAPIHandler()
-	mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if strings.HasPrefix(r.URL.Path, "/v1") {
-			gwmux.ServeHTTP(w, r)
-			return
-		}
-		openApiHandler.ServeHTTP(w, r)
-	}))
+	mux.Handle("/static/", http.StripPrefix("/static/", getOpenAPIHandler()))
+	mux.Handle("/", gwmux)
 	swaggerBox := packr.New("swagger.json", "../../api")
 	mux.HandleFunc("/swagger.json", func(w http.ResponseWriter, r *http.Request) {
 		swagger, err := swaggerBox.FindString("tvtime.swagger.json")
