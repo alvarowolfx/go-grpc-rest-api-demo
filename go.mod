@@ -3,6 +3,7 @@ module com.aviebrantz.tvtime
 go 1.15
 
 require (
+	bazil.org/fuse v0.0.0-20200524192727-fb710f7dfd05
 	github.com/brianvoe/gofakeit/v6 v6.0.3
 	github.com/bufbuild/buf v0.35.0
 	github.com/dgraph-io/badger v1.6.2
@@ -21,6 +22,7 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.2.0
 	github.com/plgd-dev/go-coap/v2 v2.3.0
+	github.com/rakyll/statik v0.1.7
 	github.com/rubenv/sql-migrate v0.0.0-20200616145509-8d140a17f351
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/net v0.0.0-20201021035429-f5854403a974

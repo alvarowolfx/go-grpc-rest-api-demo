@@ -4,17 +4,6 @@
     "title": "TV Time API",
     "version": "1.0"
   },
-  "tags": [
-    {
-      "name": "AuthService"
-    },
-    {
-      "name": "CatalogService"
-    },
-    {
-      "name": "UserService"
-    }
-  ],
   "host": "localhost:9090",
   "schemes": [
     "http"
@@ -466,6 +455,18 @@
       }
     }
   },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
   "externalDocs": {
     "description": "Demo application building Rest APIs with gRPC",
     "url": "https://github.com/alvarowolfx/grpc-rest-demo"

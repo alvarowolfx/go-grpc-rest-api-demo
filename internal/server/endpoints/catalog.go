@@ -54,8 +54,12 @@ func (e *catalogEndpoint) List(ctx context.Context, req *tvtime.SearchCatalogFil
 	if req.Page <= 0 {
 		req.Page = 0
 	}
+	var term *string
+	if req.Term != nil {
+		term = &req.Term.Value
+	}
 	entries, total, err := e.CatalogService.ListEntries(ctx, catalog.EntriesFilter{
-		Term:    &req.Term,
+		Term:    term,
 		Type:    &req.Type,
 		Page:    int(req.Page),
 		PerPage: int(req.PerPage),

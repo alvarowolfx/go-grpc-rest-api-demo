@@ -87,7 +87,7 @@ type UnsafeCatalogServiceServer interface {
 	mustEmbedUnimplementedCatalogServiceServer()
 }
 
-func RegisterCatalogServiceServer(s grpc.ServiceRegistrar, srv CatalogServiceServer) {
+func RegisterCatalogServiceServer(s *grpc.Server, srv CatalogServiceServer) {
 	s.RegisterService(&_CatalogService_serviceDesc, srv)
 }
 

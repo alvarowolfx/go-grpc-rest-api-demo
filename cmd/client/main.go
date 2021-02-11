@@ -29,7 +29,10 @@ func main() {
 
 	ctx := context.Background()
 	client := tvtime.NewCatalogServiceClient(conn)
-	_, err = client.Create(ctx, &tvtime.CreateEntryRequest{})
+	_, err = client.Create(ctx, &tvtime.CreateEntryRequest{
+		Name: "Wandavision",
+		Type: tvtime.CatalogType_TV_SHOW,
+	})
 	if err != nil {
 		log.Fatalf("failed to fetch running work orders: %v", err)
 	}

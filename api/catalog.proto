@@ -5,6 +5,7 @@ option go_package = ".;tvtime";
 package com.aviebrantz.tvtime;
 
 import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
 
 enum CatalogType {
   MOVIE = 0;
@@ -14,7 +15,7 @@ enum CatalogType {
 message CatalogEntry {
   string id = 1;
   string slug = 2;
-  string name = 3;
+  string  name = 3;
   string imageUrl = 4;
   CatalogType type = 5;
 }
@@ -30,7 +31,7 @@ message CreateEntryResponse {
 }
 
 message SearchCatalogFilter {
-  string term = 1;
+  google.protobuf.StringValue term = 1;
   CatalogType type = 2;
   int64 page = 3;
   int64 perPage = 4;

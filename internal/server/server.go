@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"mime"
 	"net/http"
 	"os"
 	"strings"
@@ -19,9 +20,13 @@ import (
 	"github.com/dgraph-io/badger/v3"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rakyll/statik/fs"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
+
+	// Static files
+	_ "com.aviebrantz.tvtime/statik"
 )
 
 // grpcHandlerFunc returns an http.Handler that delegates to grpcServer on incoming gRPC
@@ -34,6 +39,18 @@ func grpcHandlerFunc(grpcServer *grpc.Server, otherHandler http.Handler) http.Ha
 			otherHandler.ServeHTTP(w, r)
 		}
 	}), &http2.Server{})
+}
+
+func getOpenAPIHandler() http.Handler {
+	mime.AddExtensionType(".svg", "image/svg+xml")
+
+	statikFS, err := fs.New()
+	if err != nil {
+		// Panic since this is a permanent error.
+		log.Fatalf("creating OpenAPI filesystem: " + err.Error())
+	}
+
+	return http.FileServer(statikFS)
 }
 
 func Run() error {
@@ -117,7 +134,14 @@ func Run() error {
 		return err
 	}
 
-	mux.Handle("/", gwmux)
+	openApiHandler := getOpenAPIHandler()
+	mux.HandleFunc("/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasPrefix(r.URL.Path, "/v1") {
+			gwmux.ServeHTTP(w, r)
+			return
+		}
+		openApiHandler.ServeHTTP(w, r)
+	}))
 	swaggerBox := packr.New("swagger.json", "../../api")
 	mux.HandleFunc("/swagger.json", func(w http.ResponseWriter, r *http.Request) {
 		swagger, err := swaggerBox.FindString("tvtime.swagger.json")
