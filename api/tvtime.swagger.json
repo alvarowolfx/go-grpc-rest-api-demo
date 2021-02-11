@@ -129,6 +129,11 @@
         ],
         "tags": [
           "CatalogService"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
         ]
       }
     },
@@ -213,6 +218,11 @@
         },
         "tags": [
           "UserService"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
         ]
       }
     },
@@ -243,6 +253,11 @@
         ],
         "tags": [
           "UserService"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
         ]
       },
       "put": {
@@ -271,6 +286,11 @@
         ],
         "tags": [
           "UserService"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
         ]
       }
     }
@@ -462,11 +482,6 @@
       "in": "header"
     }
   },
-  "security": [
-    {
-      "Bearer": []
-    }
-  ],
   "externalDocs": {
     "description": "Demo application building Rest APIs with gRPC",
     "url": "https://github.com/alvarowolfx/grpc-rest-demo"

@@ -5,6 +5,7 @@ option go_package = ".;tvtime";
 package com.aviebrantz.tvtime;
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
 enum CatalogType {
@@ -58,6 +59,14 @@ service CatalogService {
     option (google.api.http) = {
       post : "/v1/catalog",
       body : "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Bearer";
+			    value: {};
+        }
+      }
     };
   }
 
