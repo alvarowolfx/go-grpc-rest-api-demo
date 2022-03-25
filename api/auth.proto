@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = ".;tvtime";
+option go_package = "com.aviebrantz.tvtime/tvtime";
 
 package com.aviebrantz.tvtime;
 

@@ -69,7 +69,7 @@ func (e *userEndpoint) ListFavorites(ctx context.Context, req *tvtime.ListFavori
 
 func (e *userEndpoint) AddMovieToFavorites(ctx context.Context, req *tvtime.AddRemoveMovieFavoriteRequest) (*tvtime.AddRemoveMovieFavoriteResponse, error) {
 	userID := middleware.GetUserIDFromContext(ctx)
-	err := e.FavoriteService.AddFavorite(ctx, userID, req.MovieId)
+	err := e.FavoriteService.AddFavorite(ctx, userID, req.Slug)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed add movie to favorite: %v", err)
 	}
@@ -78,7 +78,7 @@ func (e *userEndpoint) AddMovieToFavorites(ctx context.Context, req *tvtime.AddR
 
 func (e *userEndpoint) RemoveMovieFromFavorites(ctx context.Context, req *tvtime.AddRemoveMovieFavoriteRequest) (*tvtime.AddRemoveMovieFavoriteResponse, error) {
 	userID := middleware.GetUserIDFromContext(ctx)
-	err := e.FavoriteService.RemoveFavorite(ctx, userID, req.MovieId)
+	err := e.FavoriteService.RemoveFavorite(ctx, userID, req.Slug)
 	if err != nil {
 		return nil, status.Errorf(codes.InvalidArgument, "failed to remove movie from favorite: %v", err)
 	}

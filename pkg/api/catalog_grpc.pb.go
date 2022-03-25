@@ -11,6 +11,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // CatalogServiceClient is the client API for CatalogService service.
@@ -87,8 +88,8 @@ type UnsafeCatalogServiceServer interface {
 	mustEmbedUnimplementedCatalogServiceServer()
 }
 
-func RegisterCatalogServiceServer(s *grpc.Server, srv CatalogServiceServer) {
-	s.RegisterService(&_CatalogService_serviceDesc, srv)
+func RegisterCatalogServiceServer(s grpc.ServiceRegistrar, srv CatalogServiceServer) {
+	s.RegisterService(&CatalogService_ServiceDesc, srv)
 }
 
 func _CatalogService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -145,7 +146,10 @@ func _CatalogService_Get_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-var _CatalogService_serviceDesc = grpc.ServiceDesc{
+// CatalogService_ServiceDesc is the grpc.ServiceDesc for CatalogService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var CatalogService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "com.aviebrantz.tvtime.CatalogService",
 	HandlerType: (*CatalogServiceServer)(nil),
 	Methods: []grpc.MethodDesc{

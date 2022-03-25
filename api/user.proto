@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = ".;tvtime";
+option go_package = "com.aviebrantz.tvtime/tvtime";
 
 package com.aviebrantz.tvtime;
 
@@ -29,7 +29,7 @@ message ListFavoritesResponse {
 }
 
 message AddRemoveMovieFavoriteRequest {
-  string movieId = 1;
+  string slug = 1;
 }
 
 message AddRemoveMovieFavoriteResponse {}
@@ -58,7 +58,7 @@ service UserService {
 
   rpc AddMovieToFavorites(AddRemoveMovieFavoriteRequest) returns (AddRemoveMovieFavoriteResponse) {
     option (google.api.http) = {
-      put : "/v1/users/me/favorites/{movieId}",
+      put : "/v1/users/me/favorites/{slug}",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       security: {
@@ -72,7 +72,7 @@ service UserService {
 
   rpc RemoveMovieFromFavorites(AddRemoveMovieFavoriteRequest) returns (AddRemoveMovieFavoriteResponse) {
     option (google.api.http) = {
-      delete : "/v1/users/me/favorites/{movieId}",
+      delete : "/v1/users/me/favorites/{slug}",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       security: {

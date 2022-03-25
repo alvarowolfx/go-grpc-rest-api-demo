@@ -4,6 +4,17 @@
     "title": "TV Time API",
     "version": "1.0"
   },
+  "tags": [
+    {
+      "name": "AuthService"
+    },
+    {
+      "name": "CatalogService"
+    },
+    {
+      "name": "UserService"
+    }
+  ],
   "host": "localhost:9090",
   "schemes": [
     "http"
@@ -226,7 +237,7 @@
         ]
       }
     },
-    "/v1/users/me/favorites/{movieId}": {
+    "/v1/users/me/favorites/{slug}": {
       "delete": {
         "operationId": "UserService_RemoveMovieFromFavorites",
         "responses": {
@@ -245,7 +256,7 @@
         },
         "parameters": [
           {
-            "name": "movieId",
+            "name": "slug",
             "in": "path",
             "required": true,
             "type": "string"
@@ -278,7 +289,7 @@
         },
         "parameters": [
           {
-            "name": "movieId",
+            "name": "slug",
             "in": "path",
             "required": true,
             "type": "string"

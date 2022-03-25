@@ -94,14 +94,14 @@ func request_UserService_AddMovieToFavorites_0(ctx context.Context, marshaler ru
 		_   = err
 	)
 
-	val, ok = pathParams["movieId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "movieId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.MovieId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "movieId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := client.AddMovieToFavorites(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -120,14 +120,14 @@ func local_request_UserService_AddMovieToFavorites_0(ctx context.Context, marsha
 		_   = err
 	)
 
-	val, ok = pathParams["movieId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "movieId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.MovieId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "movieId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := server.AddMovieToFavorites(ctx, &protoReq)
@@ -146,14 +146,14 @@ func request_UserService_RemoveMovieFromFavorites_0(ctx context.Context, marshal
 		_   = err
 	)
 
-	val, ok = pathParams["movieId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "movieId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.MovieId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "movieId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := client.RemoveMovieFromFavorites(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -172,14 +172,14 @@ func local_request_UserService_RemoveMovieFromFavorites_0(ctx context.Context, m
 		_   = err
 	)
 
-	val, ok = pathParams["movieId"]
+	val, ok = pathParams["slug"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "movieId")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "slug")
 	}
 
-	protoReq.MovieId, err = runtime.String(val)
+	protoReq.Slug, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "movieId", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "slug", err)
 	}
 
 	msg, err := server.RemoveMovieFromFavorites(ctx, &protoReq)
@@ -414,9 +414,9 @@ var (
 
 	pattern_UserService_ListFavorites_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "users", "me", "favorites"}, ""))
 
-	pattern_UserService_AddMovieToFavorites_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "users", "me", "favorites", "movieId"}, ""))
+	pattern_UserService_AddMovieToFavorites_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "users", "me", "favorites", "slug"}, ""))
 
-	pattern_UserService_RemoveMovieFromFavorites_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "users", "me", "favorites", "movieId"}, ""))
+	pattern_UserService_RemoveMovieFromFavorites_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "users", "me", "favorites", "slug"}, ""))
 )
 
 var (
